@@ -29,6 +29,7 @@ import {SynchronizeWithEdeboComponent} from './synchronize-with-edebo/synchroniz
 import { AssignStudentsToGroupComponent } from './assign-students-to-group/assign-students-to-group.component';
 import { StudentThesisThemeInputComponent } from './student-thesis-theme-input/student-thesis-theme-input.component';
 import { AssignRecordBookNumberToStudentsComponent } from './assign-record-book-number-to-students/assign-record-book-number-to-students.component';
+import {StudentDiplomaNumberInputComponent} from './student-diploma-number-input/student-diploma-number-input.component';
 
 export const studentRoutes: Routes = [
   {path: '', component: StudentsComponent},
@@ -57,6 +58,7 @@ export const studentRoutes: Routes = [
     StudentAcademicVacationComponent,
     AssignStudentsToGroupComponent,
     StudentThesisThemeInputComponent,
+    StudentDiplomaNumberInputComponent,
     AssignRecordBookNumberToStudentsComponent,
     SynchronizeWithEdeboComponent
   ],
