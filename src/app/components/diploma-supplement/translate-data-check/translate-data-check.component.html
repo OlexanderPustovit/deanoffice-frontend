@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title">Перевірка перекладу</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="translateCheckData.length == 0; else createTable">
+  <h3 class="pl-3"> Всі переклади вірні </h3>
+</div>
+<ng-template #createTable>
+  <div class="div-table">
+    <table class="table table-striped table-sm fs-13">
+      <tr>
+        <th class="pl-3">№</th>
+        <th>Назва</th>
+        <th>Повідомлення</th>
+      </tr>
+      <tr *ngFor="let item of translateCheckData; let i = index">
+        <td class="pl-3">{{ i + 1 }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.message }}</td>
+      </tr>
+    </table>
+  </div>
+</ng-template>
+<footer class="modal-footer">
+  <button type="button" class="btn btn-outline-success" style="margin-left: auto" (click)="closeWindow()">Ок</button>
+</footer>

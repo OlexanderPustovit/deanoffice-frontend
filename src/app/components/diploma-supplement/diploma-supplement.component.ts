@@ -9,6 +9,7 @@ import {DiplomaSupplementService} from '../../services/diploma-supplement.servic
 import {EditDialogComponent} from "../courses-for-groups/edit-dialog/edit-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {StudentsDataCheckComponent} from "./students-data-check/students-data-check.component";
+import {TranslateDataCheckComponent} from './translate-data-check/translate-data-check.component';
 
 @Component({
   selector: 'diploma-supplement',
@@ -28,6 +29,7 @@ export class DiplomaSupplementComponent implements OnInit {
   gradesTableReportLoading = false;
   coursesTableReportLoading = false;
   studentDataCheckLoading = false;
+  translateCourseCheck = false;
 
   constructor(private degreeService: DegreeService, private groupService: GroupService,
               private diplomaSupplementService: DiplomaSupplementService,
@@ -110,5 +112,16 @@ export class DiplomaSupplementComponent implements OnInit {
         modalRef.componentInstance.studentsCheckData = res;
       }
     );
+  }
+
+  onTranslateCourseCheck(): void {
+    this.translateCourseCheck = true;
+    this.diplomaSupplementService.checkTranslateCourse(this.currentDegreeId).subscribe(res => {
+      this.translateCourseCheck = false;
+      const modelRef = this.modalService.open(TranslateDataCheckComponent, { centered: true, size: 'lg' });
+      modelRef.componentInstance.translateCheckData = res;
+    }, error => {
+      this.translateCourseCheck = false;
+    });
   }
 }

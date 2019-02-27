@@ -36,7 +36,12 @@ export class DiplomaSupplementService {
 
   checkStudentsData(degreeId: string): Observable<DataForSupplementStudentCheck[]> {
     const url = `${this.documentsUrl}/supplements/data-check`;
-    return this.http.get<DataForSupplementStudentCheck[]>(url,{params: {degreeId}});
+    return this.http.get<DataForSupplementStudentCheck[]>(url, { params: {degreeId} });
+  }
+
+  checkTranslateCourse(degreeId: string): Observable<{name: string, message: string}[]> {
+    const url = `${this.documentsUrl}/supplements/check-courses-translation`;
+    return this.http.get<{name: string, message: string}[]>(url, { params: {degreeId} });
   }
 
 
