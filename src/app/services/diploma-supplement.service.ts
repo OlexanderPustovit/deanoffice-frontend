@@ -7,6 +7,7 @@ import {Degree} from "../models/Degree";
 import {HttpClient} from "@angular/common/http";
 import {DataForSupplementStudentCheck} from "../models/custom/DataForSupplementStudentCheck";
 import {Observable} from "rxjs";
+import {DataForSupplementTranslateCheck} from '../models/custom/DataForSupplementTranslateCheck';
 
 @Injectable()
 export class DiplomaSupplementService {
@@ -39,9 +40,9 @@ export class DiplomaSupplementService {
     return this.http.get<DataForSupplementStudentCheck[]>(url, { params: {degreeId} });
   }
 
-  checkTranslateCourse(degreeId: string): Observable<{name: string, message: string}[]> {
+  checkTranslateCourse(degreeId: string): Observable<DataForSupplementTranslateCheck[]> {
     const url = `${this.documentsUrl}/supplements/check-courses-translation`;
-    return this.http.get<{name: string, message: string}[]>(url, { params: {degreeId} });
+    return this.http.get<DataForSupplementTranslateCheck[]>(url, { params: {degreeId} });
   }
 
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataForSupplementTranslateCheck } from '../../../models/custom/DataForSupplementTranslateCheck';
 
 @Component({
   selector: 'translate-data-check',
@@ -7,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./translate-data-check.component.scss']
 })
 export class TranslateDataCheckComponent {
-  translateCheckData: { name: string, message: string }[];
+  translateCheckData: DataForSupplementTranslateCheck[];
 
   constructor(public activeModal: NgbActiveModal) { }
 
