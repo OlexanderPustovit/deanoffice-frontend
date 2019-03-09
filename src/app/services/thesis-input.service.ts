@@ -1,8 +1,10 @@
 
+import {throwError as observableThrowError, Observable} from 'rxjs';
+import 'rxjs/add/operator/catch';
+
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class ThesisInputService {
 
@@ -20,7 +22,7 @@ export class ThesisInputService {
 
   _errorHandler(error: Response) {
     console.error('Error Occured: ' + error);
-    return Observable.throw(error || 'Some Error on Server Occured');
+    return observableThrowError(error || 'Some Error on Server Occured');
   }
 
 }

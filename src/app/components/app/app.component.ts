@@ -1,3 +1,5 @@
+
+import {mergeMap, map, filter} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -15,15 +17,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.events
-      .filter((event) => event instanceof NavigationEnd)
-      .map(() => this.activatedRoute)
-      .map((route) => {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.activatedRoute),
+      map((route) => {
         while (route.firstChild) route = route.firstChild;
         return route;
-      })
-      .filter((route) => route.outlet === 'primary')
-      .mergeMap((route) => route.data)
+      }),
+      filter((route) => route.outlet === 'primary'),
+      mergeMap((route) => route.data),)
       .subscribe((event) => this.titleService.setTitle(`Деканат - ${event['title']}`));
   }
 }

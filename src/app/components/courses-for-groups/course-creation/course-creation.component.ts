@@ -1,17 +1,18 @@
+
+import {filter, map, merge, distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Course} from '../../../models/Course';
 import {KnowledgeControl} from '../../../models/KnowlegeControl';
 import {CourseService} from '../../../services/course.service';
 import {KnowledgeControlService} from '../../../services/knowledge-control.service';
 import {CourseName} from '../../../models/CourseName';
-import {Subject} from 'rxjs/Subject';
+import {Subject, Observable} from 'rxjs';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+
+
+
+
+
 import {NotificationsService} from "angular2-notifications";
 import {StudentGroup} from "../../../models/StudentGroup";
 
@@ -67,12 +68,12 @@ export class CourseCreationComponent implements OnInit {
 
 
   search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(200).distinctUntilChanged()
-      .merge(this.focus$)
-      .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
-      .map(term => term === '' ? []
-        : this.courseNames.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 16));
+    text$.pipe(
+      debounceTime(200),distinctUntilChanged(),
+      merge(this.focus$),
+      merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
+      map(term => term === '' ? []
+        : this.courseNames.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 16)),);
 
   checkCourseName(name) {
     if (!name.id) {

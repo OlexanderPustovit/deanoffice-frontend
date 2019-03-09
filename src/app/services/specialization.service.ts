@@ -1,9 +1,10 @@
+
+import {map, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Specialization} from '../models/Specialization';
-import {catchError} from 'rxjs/operators';
 import {forObservable, forPromise} from '../components/shared/httpErrors';
 
 const API_URL: string = environment.apiUrl;
@@ -31,8 +32,8 @@ export class SpecializationService {
 
   getById(sourceId: number): Observable<Specialization> {
     return this._httpClient.get<Specialization>(`${SPECIALIZATION_URL}/${sourceId}`)
-      .pipe(catchError(forObservable('Отриманная спеціалізації по Id', [])))
-      .map(data => data as Specialization)
+      .pipe(catchError(forObservable('Отриманная спеціалізації по Id', []))).pipe(
+      map(data => data as Specialization))
   }
 
   update(body: Specialization): Promise<any> {
